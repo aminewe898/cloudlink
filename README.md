@@ -1,5 +1,8 @@
 <div align="center">
-<img src="https://github.com/user-attachments/assets/80708117-2351-45ee-a470-11930a5cf641" alt="CloudLink Logo" width="200"/>
+<img src="https://github.com/user-attachments/assets/c7096dc6-149d-4adf-8d3a-0d2859e13b79"
+     alt="CloudLink Logo"
+     width="220"/>
+
   <h1>CloudLink</h1>
   <p><strong>A modern, high-performance Android application for server administration, telemetry, and secure file transfer.</strong></p>
   
