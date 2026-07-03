@@ -1,5 +1,6 @@
 <div align="center">
-  <img src="assets/logo/logo.png" alt="CloudLink Logo" width="200"/>
+  <img src="<img width="1254" height="1254" alt="file_00000000e5e871f4aa11a75f1a8ba567" src="https://github.com/user-attachments/assets/80708117-2351-45ee-a470-11930a5cf641" />
+" alt="CloudLink Logo" width="200"/>
   <h1>CloudLink</h1>
   <p><strong>A modern, high-performance Android application for server administration, telemetry, and secure file transfer.</strong></p>
   
@@ -59,7 +60,7 @@ See the [Architecture Docs](docs/architecture/README.md) for detailed schematics
 ### Clone & Build
 ```bash
 # Clone the repository
-git clone https://github.com/USERNAME/CloudLink.git
+git clone git clone https://github.com/aminewe898/cloudlink.git
 
 # Open the project in Android Studio, or build via Gradle
 cd CloudLink
