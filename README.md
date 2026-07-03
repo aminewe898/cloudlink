@@ -3,7 +3,7 @@
   <h1>CloudLink</h1>
   <p><strong>A modern, high-performance Android application for server administration, telemetry, and secure file transfer.</strong></p>
   
-  [![Build Status](https://github.com/USERNAME/CloudLink/actions/workflows/android.yml/badge.svg)](https://github.com/USERNAME/CloudLink/actions)
+ 
   [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
   [![Kotlin](https://img.shields.io/badge/kotlin-%237F52FF.svg?style=flat&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
   [![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=flat&logo=android&logoColor=white)](https://developer.android.com/jetpack/compose)
@@ -11,7 +11,6 @@
 
 <br/>
 
-![Feature Graphic](assets/banners/banner.png)
 
 ## 📌 Overview
 
