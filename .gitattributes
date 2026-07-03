@@ -1,0 +1,8 @@
+﻿* text=auto
+
+# Android-specific
+*.apk binary
+*.aar binary
+*.aab binary
+*.jks binary
+*.keystore binary

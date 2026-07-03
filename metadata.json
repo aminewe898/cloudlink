@@ -1,0 +1,6 @@
+{
+  "name": "CloudLink",
+  "description": "Premium SSH, SFTP, and server management platform for Linux, Raspberry Pi, Docker, Proxmox, and self-hosted homelabs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
