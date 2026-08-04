@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+   Sample backup rules file; uncomment and customize as necessary.
+   See https://developer.android.com/guide/topics/data/autobackup
+   for details.
+   Note: This file is ignored for devices older than API 31
+   See https://developer.android.com/about/versions/12/backup-restore
+-->
+<full-backup-content>
+    <!-- Encrypted preferences cannot be restored without their Android Keystore key. -->
+    <exclude domain="sharedpref" path="secure_server_credentials.xml" />
+    <!-- Host trust is device-specific and must be established again after restore. -->
+    <exclude domain="file" path="known_hosts" />
+</full-backup-content>
