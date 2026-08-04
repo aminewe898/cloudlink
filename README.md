@@ -1,89 +1,109 @@
-<div align="center">
-<img src="https://github.com/user-attachments/assets/c7096dc6-149d-4adf-8d3a-0d2859e13b79"
-     alt="CloudLink Logo"
-     width="220"/>
+# CloudLink
 
-  <h1>CloudLink</h1>
-  <p><strong>A modern, high-performance Android application for server administration, telemetry, and secure file transfer.</strong></p>
-  
- 
-  [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-  [![Kotlin](https://img.shields.io/badge/kotlin-%237F52FF.svg?style=flat&logo=kotlin&logoColor=white)](https://kotlinlang.org/)
-  [![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-4285F4?style=flat&logo=android&logoColor=white)](https://developer.android.com/jetpack/compose)
-</div>
+![CloudLink](assets/feature-graphics/banner.png)
 
-<br/>
+CloudLink is a native Android application for managing remote Linux servers over SSH and SFTP. It includes a custom Canvas-rendered VT/ANSI terminal, remote text editor, portable best-effort telemetry, and local network tools.
 
+## Overview
 
-## 📌 Overview
+CloudLink is built with Jetpack Compose, coroutines, Hilt, Room, Android Keystore-backed credential encryption, and the maintained mwiede JSch fork. It is local-first and contains no analytics or advertising SDK. See the documented limitations before relying on it for critical infrastructure.
 
-CloudLink is an enterprise-grade mobile application designed to put your server infrastructure in your pocket. Built purely with **Kotlin** and **Jetpack Compose**, it offers a lightning-fast native experience, replacing multiple standalone apps by combining a VT100 Terminal, an SFTP manager, and a real-time Telemetry dashboard.
+## Screenshots
 
-## ✨ Key Features
+| Dashboard | Terminal |
+| :---: | :---: |
+| ![Dashboard](docs/screenshots/dashboard.png) | ![Terminal](docs/screenshots/terminal.png) |
+| **SFTP File Manager** | **Network Tools** |
+| ![SFTP](docs/screenshots/sftp.png) | ![Tools](docs/screenshots/tools.png) |
 
-- **High-Performance VT100 Terminal**: Run interactive TUIs (`htop`, `nano`, `vim`) directly from your phone with 60FPS fluid rendering and accurate ANSI sequence parsing.
-- **Advanced SFTP Manager**: A desktop-class file browser supporting uploads, downloads, multi-selection, file editing, and background transfers via Foreground Services.
-- **Real-Time Telemetry**: Monitor CPU, RAM, Disk, and Network I/O in real-time with fluid graphing capabilities.
-- **Enterprise Theming**: Instantly switch between 9 professionally curated themes including Modern Dark, Catppuccin, Nord, and Dracula.
-- **Secure by Default**: "Trust on First Use" SSH, encrypted credential storage (Room Database), and key-based authentication (RSA/Ed25519).
+*(See `docs/screenshots/` for additional full-resolution images.)*
 
-> See [FEATURES.md](FEATURES.md) for an exhaustive list of capabilities.
+## Architecture
 
-## 📸 Screenshots
+CloudLink uses an MVVM-shaped, state-flow architecture:
 
-<div align="center">
-  <img src="docs/screenshots/dashboard.png" width="200"/>
-  <img src="docs/screenshots/terminal.png" width="200"/>
-  <img src="docs/screenshots/sftp.png" width="200"/>
-  <img src="docs/screenshots/telemetry.png" width="200"/>
-</div>
+- **UI Layer**: Built entirely in Jetpack Compose.
+- **State Management**: Kotlin Coroutines & StateFlow.
+- **Dependency Injection**: Dagger Hilt.
+- **Persistence**: Room Database (Server configs, connection logs) & EncryptedSharedPreferences (Credentials).
+- **Network Protocol**: JSch (SSH2 implementation in Java).
 
-## 🏗️ Architecture
+## Feature Highlights
 
-CloudLink is built on modern Android development standards:
+- **Custom Terminal Engine**: A built-from-scratch Canvas-rendered VT100 emulator with a 10,000-line scrollback buffer and xterm 256-color support.
+- **Robust SSH Management**: Password and RSA private key authentication.
+- **Integrated SFTP**: A full file manager to browse, edit, and transfer files remotely.
+- **Network Utilities**: Built-in Ping, Wake-on-LAN, and RSA Key Generation.
+- **Credential Security**: AES-256-GCM credential encryption with a master key held by Android Keystore, plus an application lock supporting a strong biometric or device screen-lock credential.
+- **Dynamic Themes**: Fully customizable dark/light material themes.
 
-- **UI Layer**: Jetpack Compose, Material 3
-- **Architecture**: MVVM (Model-View-ViewModel), Repository Pattern
-- **Concurrency**: Kotlin Coroutines & Flow
-- **Dependency Injection**: Dagger Hilt
-- **Local Database**: Room (SQLite)
-- **SSH/SFTP Protocol**: JSch
+For a code-verified capability summary, see [FEATURES.md](FEATURES.md). Terminal, key, SFTP, telemetry, and release boundaries are explicit in [Known Limitations](docs/KNOWN_LIMITATIONS.md).
 
-See the [Architecture Docs](docs/architecture/README.md) for detailed schematics.
-
-## 🚀 Installation & Build
+## Installation & Build Instructions
 
 ### Prerequisites
-- Android Studio Iguana | 2023.2.1+
-- Java JDK 17
-- Minimum SDK: Android 8.0 (API 26)
+- Android Studio Ladybug (or newer)
+- JDK 17 (set via `JAVA_HOME`)
+- Android SDK API Level 36
 
-### Clone & Build
-```bash
-# Clone the repository
-git clone git clone https://github.com/aminewe898/cloudlink.git
+### Building from Source
 
-# Open the project in Android Studio, or build via Gradle
-cd CloudLink
-./gradlew assembleDebug
+1. Open the repository in Android Studio and sync Gradle.
+
+2. Build and verify:
+   ```bash
+   ./gradlew testDebugUnitTest lint assembleDebug assembleRelease
+   ```
+
+Without release-signing environment variables, `assembleRelease` deliberately produces an unsigned minified APK. See [Release Checklist](docs/RELEASE_CHECKLIST.md).
+
+## Project Structure
+
+```
+CloudLink/
+├── app/
+│   ├── src/main/java/com/cloudlink/app/
+│   │   ├── data/       # Repositories, JSch Networking, Database, Security
+│   │   ├── di/         # Dagger Hilt Modules
+│   │   ├── domain/     # Repository Interfaces
+│   │   ├── terminal/   # Custom VT100 Emulator, Buffer, & Cell Engine
+│   │   └── ui/         # Compose screens, themes, navigation, ViewModels
+├── build.gradle.kts
+└── settings.gradle.kts
 ```
 
-## 🔒 Security
+## Security Overview
 
-We take security seriously. All SSH passwords and private keys are stored locally within the encrypted Android Room database and never leave your device. 
-Please refer to [SECURITY.md](SECURITY.md) for our vulnerability disclosure process.
+Security is a primary focus of CloudLink. Server credentials are encrypted at rest using `EncryptedSharedPreferences` with AES256-GCM and a master key held by Android Keystore. Hardware-backed key storage depends on device capabilities. Encrypted credentials and SSH host-trust data are explicitly excluded from Android backup and device transfer.
 
-## 🤝 Contributing
+For the threat model and responsible disclosure, read [Security Model](docs/SECURITY_MODEL.md) and [SECURITY.md](SECURITY.md).
 
-Contributions are welcome! Whether it's reporting a bug, proposing a new feature, or submitting a Pull Request.
-Please read our [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+## Support & Documentation
 
-## 📄 License
+- [Feature Reference](FEATURES.md)
+- [Changelog](CHANGELOG.md)
+- [Frequently Asked Questions (FAQ)](FAQ.md)
+- [Future Roadmap](ROADMAP.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Testing](docs/TESTING.md)
+- [Release Checklist](docs/RELEASE_CHECKLIST.md)
+- [Dependency Review](docs/DEPENDENCIES.md)
+- [Hardening Report](docs/CODEX_FINAL_REPORT.md)
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Contributing
 
-## 🙏 Acknowledgements
+We welcome contributions from the community! Please read our [Contributing Guidelines](CONTRIBUTING.md) and our [Code of Conduct](CODE_OF_CONDUCT.md) before submitting Pull Requests.
 
-- [JSch](http://www.jcraft.com/jsch/) - Java Secure Channel
-- The Android Jetpack Compose Team
-- [Catppuccin](https://github.com/catppuccin/catppuccin) (For theme inspiration)
+## Acknowledgements & Credits
+
+See [CREDITS.md](CREDITS.md) for a full list of open-source libraries and contributors that made CloudLink possible.
+
+## License
+
+This project is licensed under the terms outlined in the repository. See [NOTICE](NOTICE) for third-party licenses.
+
+## Contact
+
+Mohamed Amine Aslimani<br>
+Founder and Developer — CloudLink / Zxeon Tech<br>
+anaslimani923@gmail.com
