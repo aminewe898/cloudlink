@@ -1,8 +1,29 @@
-﻿CloudLink
+CloudLink
 Copyright 2026 CloudLink Contributors
 
-This product includes software developed by:
-- The Android Open Source Project (https://source.android.com/)
-- JSch (http://www.jcraft.com/jsch/)
+This product includes software developed by the Apache Software Foundation (http://www.apache.org/).
 
-All third-party trademarks and logos are the property of their respective owners.
+=========================================================================
+==  Third-party Libraries                                              ==
+=========================================================================
+
+This application utilizes the following open-source projects:
+
+1. JSch - Java Secure Channel
+   Copyright (c) 2002-2015 Atsuhiko Yamanaka, JCraft,Inc.
+   All rights reserved.
+   Licensed under the BSD-style License.
+
+2. Jetpack Compose & AndroidX Libraries
+   Copyright (C) The Android Open Source Project
+   Licensed under the Apache License, Version 2.0.
+
+3. Kotlin Standard Library & Coroutines
+   Copyright (C) JetBrains s.r.o.
+   Licensed under the Apache License, Version 2.0.
+
+4. Dagger Hilt
+   Copyright (C) The Dagger Authors
+   Licensed under the Apache License, Version 2.0.
+
+For full license texts, please see the respective project repositories.

@@ -1,5 +1,7 @@
 *.iml
 .gradle
+/\.idea/
+/\.kotlin/
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -48,3 +50,9 @@ ctest_update.xml
 # CloudLink Secrets
 secrets.properties
 app/google-services.json
+
+# Generated release artifacts and oversized local media
+*.apk
+*.aab
+/releases/
+/docs/demo/*.mp4
