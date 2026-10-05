@@ -105,5 +105,9 @@ This project is licensed under the terms outlined in the repository. See [NOTICE
 ## Contact
 
 Mohamed Amine Aslimani<br>
-Founder and Developer — CloudLink / Zxeon Tech<br>
+Project maintainer<br>
 anaslimani923@gmail.com
+
+## Verification evidence
+
+See [portfolio validation](docs/PORTFOLIO_VALIDATION.md) for checks performed and explicit limits.
