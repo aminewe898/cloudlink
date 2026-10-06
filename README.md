@@ -1,6 +1,6 @@
 # CloudLink
 
-![CloudLink](assets/feature-graphics/banner.png)
+![CloudLink]
 
 CloudLink is a native Android application for managing remote Linux servers over SSH and SFTP. It includes a custom Canvas-rendered VT/ANSI terminal, remote text editor, portable best-effort telemetry, and local network tools.
 
